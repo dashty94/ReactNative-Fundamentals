@@ -1,19 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react"
+import { View } from "react-native"
+import WelcomeScreen from "./app/screens/WelcomeScreen"
+import ViewImageScreen from "./app/screens/ViewImageScreen"
+import LearningAssets from "./app/learningAssets/StylingText"
+import AppButton from "./app/components/AppButton"
+import Card from "./app/components/Card"
+import ListingDetailsScreen from "./app/screens/ListingDetailsScreen"
+import MessagesScreen from "./app/screens/MessagesScreen"
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+    return <MessagesScreen />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
