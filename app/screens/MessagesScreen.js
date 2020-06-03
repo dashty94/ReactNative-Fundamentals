@@ -4,7 +4,6 @@ import ListItem from "../components/ListItem"
 import Screen from "../components/Screen"
 import ListItemSeperator from "../components/ListItemSeperator"
 import ListItemDeleteAction from "../components/ListItemDeleteAction"
-
 const initialMessages = [
     {
         id: 1,
