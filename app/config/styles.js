@@ -8,4 +8,8 @@ export default {
         fontSize: 18,
         fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     },
+    debug: {
+        borderColor: "black",
+        borderWidth: 1,
+    },
 }
