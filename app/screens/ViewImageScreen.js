@@ -1,7 +1,8 @@
-import React from "react"
-import { ImageBackground, StyleSheet, View, Image, Text } from "react-native"
-import colors from "../config/colors"
+import { Image, StyleSheet, View } from "react-native"
+
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import React from "react"
+import colors from "../config/colors"
 
 function ViewImageScreen(props) {
     return (

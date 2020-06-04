@@ -1,6 +1,7 @@
-import React from "react"
-import { View, TextInput, StyleSheet, Platform } from "react-native"
+import { StyleSheet, TextInput, View } from "react-native"
+
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import React from "react"
 import defaultStyles from "../config/styles"
 
 function AppTextInput({ icon, ...otherProps }) {

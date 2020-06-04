@@ -1,18 +1,12 @@
+import { Button, FlatList, Modal, StyleSheet, View } from "react-native"
 import React, { useState } from "react"
-import {
-    View,
-    TextInput,
-    StyleSheet,
-    Modal,
-    Button,
-    FlatList,
-} from "react-native"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
-import defaultStyles from "../config/styles"
+
 import AppText from "./AppText"
-import { TouchableWithoutFeedback } from "react-native"
-import Screen from "./Screen"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 import PickerItem from "./PickerItem"
+import Screen from "./Screen"
+import { TouchableWithoutFeedback } from "react-native"
+import defaultStyles from "../config/styles"
 
 function AppPicker({ icon, placeholder, items, onSelectItem, selectedItem }) {
     const [modalVisible, setModalVisible] = useState(false)

@@ -1,10 +1,10 @@
+import { FlatList, StyleSheet, View } from "react-native"
+import { ListItem, ListItemSeperator } from "../components/lists"
+
+import Icon from "../components/Icon"
 import React from "react"
 import Screen from "../components/Screen"
-import ListItem from "../components/ListItem"
-import Icon from "../components/Icon"
-import { StyleSheet, View, FlatList } from "react-native"
 import colors from "../config/colors"
-import ListItemSeperator from "../components/ListItemSeperator"
 
 const menuItems = [
     {
