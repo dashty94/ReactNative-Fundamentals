@@ -1,17 +1,21 @@
-import React from "react"
-import { View, StyleSheet, Image } from "react-native"
-import colors from "../config/colors"
-import AppText from "./AppText"
+import { Image, StyleSheet, View } from "react-native"
 
-function Card({ title, subTtitle, image }) {
+import AppText from "./AppText"
+import React from "react"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import colors from "../config/colors"
+
+function Card({ title, subTtitle, image, onPress }) {
     return (
-        <View style={styles.card}>
-            <Image source={image} style={styles.image} />
-            <View style={styles.detailsContainer}>
-                <AppText style={styles.title}>{title}</AppText>
-                <AppText style={styles.subTtitle}>{subTtitle}</AppText>
+        <TouchableOpacity onPress={onPress}>
+            <View style={styles.card}>
+                <Image source={image} style={styles.image} />
+                <View style={styles.detailsContainer}>
+                    <AppText style={styles.title}>{title}</AppText>
+                    <AppText style={styles.subTtitle}>{subTtitle}</AppText>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

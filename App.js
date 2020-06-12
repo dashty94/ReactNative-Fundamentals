@@ -1,9 +1,13 @@
 import { Button, Text } from "react-native"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 
+import AppNavigator from "./app/navigation/AppNavigator"
+import AuthNavigator from "./app/navigation/AuthNavigator"
 import React from "react"
 import Screen from "./app/components/Screen"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
+import navigationTheme from "./app/navigation/navigationTheme"
 
 const Tweets = ({ navigation }) => (
     <Screen>
@@ -32,16 +36,44 @@ const TweetDetails = ({ route }) => (
 const Stack = createStackNavigator()
 
 const StackNavigator = () => (
-    <Stack.Navigator>
+    <Stack.Navigator
+        screenOptions={{
+            headerStyle: { backgroundColor: "tomato" },
+            headerShown: false,
+        }}
+    >
         <Stack.Screen name="Tweet" component={Tweets} />
         <Stack.Screen name="TweetDetails" component={TweetDetails} />
     </Stack.Navigator>
 )
 
+const Account = () => {
+    return (
+        <Screen>
+            <Text> Account</Text>
+        </Screen>
+    )
+}
+
+const Tab = createBottomTabNavigator()
+const TabNavigator = () => {
+    return (
+        <Tab.Navigator
+            tabBarOptions={{
+                activeBackgroundColor: "tomato",
+                activeTintColor: "white",
+            }}
+        >
+            <Tab.Screen name="Feed" component={StackNavigator} />
+            <Tab.Screen name="Account" component={Account} />
+        </Tab.Navigator>
+    )
+}
+
 export default function App() {
     return (
-        <NavigationContainer>
-            <StackNavigator />
+        <NavigationContainer theme={navigationTheme}>
+            <AppNavigator />
         </NavigationContainer>
     )
 }
