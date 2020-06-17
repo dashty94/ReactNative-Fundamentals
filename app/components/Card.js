@@ -5,11 +5,11 @@ import React from "react"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import colors from "../config/colors"
 
-function Card({ title, subTtitle, image, onPress }) {
+function Card({ title, subTtitle, imageUrl, onPress }) {
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.card}>
-                <Image source={image} style={styles.image} />
+                <Image source={{ uri: imageUrl }} style={styles.image} />
                 <View style={styles.detailsContainer}>
                     <AppText style={styles.title}>{title}</AppText>
                     <AppText style={styles.subTtitle}>{subTtitle}</AppText>
