@@ -1,24 +1,25 @@
-import { FlatList, StyleSheet, View } from "react-native"
-import { ListItem, ListItemSeperator } from "../components/lists"
+import { FlatList, StyleSheet, View } from 'react-native'
+import { ListItem, ListItemSeperator } from '../components/lists'
 
-import Icon from "../components/Icon"
-import React from "react"
-import Screen from "../components/Screen"
-import colors from "../config/colors"
-import routes from "../navigation/routes"
+import Icon from '../components/Icon'
+import React from 'react'
+import Screen from '../components/Screen'
+import colors from '../config/colors'
+import routes from '../navigation/routes'
+import useAuth from '../auth/useAuth'
 
 const menuItems = [
     {
-        title: "My listings",
+        title: 'My listings',
         icon: {
-            name: "format-list-bulleted",
+            name: 'format-list-bulleted',
             backgroundColor: colors.primary,
         },
     },
     {
-        title: "My Messages",
+        title: 'My Messages',
         icon: {
-            name: "email",
+            name: 'email',
             backgroundColor: colors.secondary,
         },
         targetScreen: routes.MESSAGES,
@@ -26,14 +27,12 @@ const menuItems = [
 ]
 
 function AccountScreen({ navigation }) {
+    const { user, logOut } = useAuth()
+
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
-                <ListItem
-                    title="Dashty Frya"
-                    subTitle="dashty.fr@gmail.com"
-                    image={require("../assets/dashty.jpg")}
-                />
+                <ListItem title={user.name} subTitle={user.email} image={require('../assets/dashty.jpg')} />
             </View>
             <View style={styles.container}>
                 <FlatList
@@ -42,15 +41,8 @@ function AccountScreen({ navigation }) {
                     renderItem={({ item }) => (
                         <ListItem
                             title={item.title}
-                            IconComponent={
-                                <Icon
-                                    name={item.icon.name}
-                                    backgroundColor={item.icon.backgroundColor}
-                                />
-                            }
-                            onPress={() =>
-                                navigation.navigate(item.targetScreen)
-                            }
+                            IconComponent={<Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />}
+                            onPress={() => navigation.navigate(item.targetScreen)}
                         />
                     )}
                     ItemSeparatorComponent={ListItemSeperator}
@@ -59,6 +51,7 @@ function AccountScreen({ navigation }) {
             <ListItem
                 title="Log Out"
                 IconComponent={<Icon name="logout" backgroundColor="#ffee66" />}
+                onPress={() => logOut()}
             />
         </Screen>
     )
