@@ -1,15 +1,16 @@
-import { Image, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from 'react-native'
 
-import AppText from "./AppText"
-import React from "react"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import colors from "../config/colors"
+import AppText from './AppText'
+import { Image } from 'react-native-expo-image-cache'
+import React from 'react'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import colors from '../config/colors'
 
-function Card({ title, subTtitle, imageUrl, onPress }) {
+function Card({ title, subTtitle, imageUrl, onPress, thumbnailUrl }) {
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.card}>
-                <Image source={{ uri: imageUrl }} style={styles.image} />
+                <Image uri={imageUrl} style={styles.image} preview={{ uri: thumbnailUrl }} tint="light" />
                 <View style={styles.detailsContainer}>
                     <AppText style={styles.title}>{title}</AppText>
                     <AppText style={styles.subTtitle}>{subTtitle}</AppText>
@@ -24,10 +25,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: colors.white,
         marginBottom: 20,
-        overflow: "hidden",
+        overflow: 'hidden',
     },
     image: {
-        width: "100%",
+        width: '100%',
         height: 200,
     },
     detailsContainer: {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     },
     subTtitle: {
         color: colors.secondary,
-        fontWeight: "bold",
+        fontWeight: 'bold',
     },
 })
 

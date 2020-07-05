@@ -1,13 +1,15 @@
-import { Button, Text } from "react-native"
-import { NavigationContainer, useNavigation } from "@react-navigation/native"
+import { AsyncStorage, Button, Text } from 'react-native'
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import NetInfo, { useNetInfo } from '@react-native-community/netinfo'
 
-import AppNavigator from "./app/navigation/AppNavigator"
-import AuthNavigator from "./app/navigation/AuthNavigator"
-import React from "react"
-import Screen from "./app/components/Screen"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { createStackNavigator } from "@react-navigation/stack"
-import navigationTheme from "./app/navigation/navigationTheme"
+import AppNavigator from './app/navigation/AppNavigator'
+import AuthNavigator from './app/navigation/AuthNavigator'
+import OfflineNotice from './app/components/OfflineNotice'
+import React from 'react'
+import Screen from './app/components/Screen'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
+import navigationTheme from './app/navigation/navigationTheme'
 
 const Tweets = ({ navigation }) => (
     <Screen>
@@ -19,12 +21,7 @@ const Tweets = ({ navigation }) => (
 const Link = () => {
     const navigation = useNavigation()
 
-    return (
-        <Button
-            title="Click"
-            onPress={() => navigation.navigate("TweetDetails", { id: 1 })}
-        />
-    )
+    return <Button title="Click" onPress={() => navigation.navigate('TweetDetails', { id: 1 })} />
 }
 
 const TweetDetails = ({ route }) => (
@@ -38,7 +35,7 @@ const Stack = createStackNavigator()
 const StackNavigator = () => (
     <Stack.Navigator
         screenOptions={{
-            headerStyle: { backgroundColor: "tomato" },
+            headerStyle: { backgroundColor: 'tomato' },
             headerShown: false,
         }}
     >
@@ -60,8 +57,8 @@ const TabNavigator = () => {
     return (
         <Tab.Navigator
             tabBarOptions={{
-                activeBackgroundColor: "tomato",
-                activeTintColor: "white",
+                activeBackgroundColor: 'tomato',
+                activeTintColor: 'white',
             }}
         >
             <Tab.Screen name="Feed" component={StackNavigator} />
@@ -71,9 +68,29 @@ const TabNavigator = () => {
 }
 
 export default function App() {
+    const unsubscribe = NetInfo.addEventListener((NetInfo) => console.log(NetInfo))
+
+    const netInfo = useNetInfo()
+
+    const demo = async () => {
+        try {
+            await AsyncStorage.setItem('person', JSON.stringify({ id: 1 }))
+            const value = await AsyncStorage.getItem('person')
+            const person = JSON.parse(value)
+            console.log(person)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    demo()
+
     return (
-        <NavigationContainer theme={navigationTheme}>
-            <AppNavigator />
-        </NavigationContainer>
+        <>
+            <OfflineNotice />
+            <NavigationContainer theme={navigationTheme}>
+                <AppNavigator />
+            </NavigationContainer>
+        </>
     )
 }
