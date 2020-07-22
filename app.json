@@ -17,6 +17,10 @@
         "assetBundlePatterns": ["**/*"],
         "ios": {
             "supportsTablet": true
+        },
+        "description": "A market place for selling the things you do not want anymore",
+        "notification": {
+            "iosDisplayInForeground": true
         }
     }
 }

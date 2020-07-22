@@ -1,6 +1,7 @@
-import { StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
 
 import AppText from '../components/AppText'
+import ContactSellerForm from '../components/ContactSellerForm'
 import { Image } from 'react-native-expo-image-cache'
 import { ListItem } from '../components/lists'
 import React from 'react'
@@ -9,7 +10,7 @@ import colors from '../config/colors'
 function ListingDetailsScreen({ route }) {
     const listing = route.params
     return (
-        <View>
+        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 100}>
             <Image
                 uri={listing.images[0].url}
                 preview={{ uri: listing.images[0].thumbnailUrl }}
@@ -22,8 +23,9 @@ function ListingDetailsScreen({ route }) {
                 <View style={styles.userContainer}>
                     <ListItem image={require('../assets/dashty.jpg')} title="Dashty Frya" subTitle="5 Listings" />
                 </View>
+                <ContactSellerForm listing={listing} />
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 

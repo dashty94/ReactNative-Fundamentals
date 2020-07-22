@@ -1,6 +1,5 @@
-import { AsyncStorage, Button, Text } from 'react-native'
+import { Button, Text } from 'react-native'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
-import NetInfo, { useNetInfo } from '@react-native-community/netinfo'
 import React, { useState } from 'react'
 
 import { AppLoading } from 'expo'
@@ -12,6 +11,7 @@ import Screen from './app/components/Screen'
 import authStorage from './app/auth/storage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
+import { navigationRef } from './app/navigation/rootNavigation'
 import navigationTheme from './app/navigation/navigationTheme'
 
 const Tweets = ({ navigation }) => (
@@ -84,7 +84,7 @@ export default function App() {
     return (
         <AuthContext.Provider value={{ user, setUser }}>
             <OfflineNotice />
-            <NavigationContainer theme={navigationTheme}>
+            <NavigationContainer ref={navigationRef} theme={navigationTheme}>
                 {user ? <AppNavigator /> : <AuthNavigator />}
             </NavigationContainer>
         </AuthContext.Provider>
