@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import ActivityIndicator from '../components/ActivityIndicator'
 import AppText from '../components/AppText'
@@ -13,9 +13,24 @@ import useApi from '../hooks/useApi'
 
 function ListingsScreen({ navigation }) {
     const { data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings)
+    const [refreshing, setRefreshing] = useState(false)
 
     useEffect(() => {
         loadListings()
+    }, [])
+
+    const wait = (timeout) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, timeout)
+        })
+    }
+    const onRefresh = useCallback(() => {
+        setRefreshing(true)
+
+        wait(2000).then(() => {
+            setRefreshing(false)
+            loadListings()
+        })
     }, [])
 
     return (
@@ -40,6 +55,8 @@ function ListingsScreen({ navigation }) {
                             thumbnailUrl={item.images[0].thumbnailUrl}
                         />
                     )}
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
                 />
             </Screen>
         </>

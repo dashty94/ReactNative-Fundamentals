@@ -27,7 +27,7 @@ const categories = [
 
 function ListingEditScreen() {
     const location = useLocations()
-    const [uploadVisivle, setUploadVisible] = useState(false)
+    const [uploadVisible, setUploadVisible] = useState(false)
     const [progress, setProgress] = useState(0)
 
     handleSubmit = async (listing, { resetForm }) => {
@@ -45,7 +45,7 @@ function ListingEditScreen() {
 
     return (
         <Screen style={styles.container}>
-            <UploadScreen onDone={() => setUploadVisible(false)} progress={progress} visible={uploadVisivle} />
+            <UploadScreen onDone={() => setUploadVisible(false)} progress={progress} visible={uploadVisible} />
             <AppForm
                 initialValues={{
                     title: '',

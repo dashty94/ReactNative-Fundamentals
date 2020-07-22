@@ -1,31 +1,34 @@
-import { FlatList, StyleSheet } from "react-native"
-import {
-    ListItem,
-    ListItemDeleteAction,
-    ListItemSeperator,
-} from "../components/lists"
-import React, { useState } from "react"
+import { FlatList, StyleSheet } from 'react-native'
+import { ListItem, ListItemDeleteAction, ListItemSeperator } from '../components/lists'
+import React, { useCallback, useEffect, useState } from 'react'
 
-import Screen from "../components/Screen"
+import MessagesApi from '../api/messages'
+import Screen from '../components/Screen'
+import routes from '../navigation/routes'
 
-const initialMessages = [
-    {
-        id: 1,
-        title: "T1",
-        description: "D1",
-        image: require("../assets/dashty.jpg"),
-    },
-    {
-        id: 2,
-        title: "T2",
-        description: "D2",
-        image: require("../assets/dashty.jpg"),
-    },
-]
-
-function MessagesScreen(props) {
-    const [messages, setMessages] = useState(initialMessages)
+function MessagesScreen({ navigation }) {
+    const { data: messages, error, loading, request: loadMessages } = useApi(MessagesApi.getLMessagesForUser)
+    // const [messages, setMessages] = useState(initialMessages)
     const [refreshing, setRefreshing] = useState(false)
+
+    useEffect(() => {
+        loadMessages()
+    }, [])
+
+    const wait = (timeout) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, timeout)
+        })
+    }
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true)
+
+        wait(2000).then(() => {
+            setRefreshing(false)
+            loadMessages()
+        })
+    }, [])
 
     const handleDelete = (message) => {
         setMessages(messages.filter((m) => m.id !== message.id))
@@ -38,29 +41,16 @@ function MessagesScreen(props) {
                 keyExtractor={(message) => message.id.toString()}
                 renderItem={({ item }) => (
                     <ListItem
-                        title={item.title}
-                        subTitle={item.description}
+                        title={item.fromUser.name}
+                        subTitle={item.content}
                         image={item.image}
-                        onPress={() => console.log("Message selected", item)}
-                        renderRightActions={() => (
-                            <ListItemDeleteAction
-                                onPress={() => handleDelete(item)}
-                            />
-                        )}
+                        onPress={() => navigation.navigate(routes.MESSAGE_DETAILS, item)}
+                        renderRightActions={() => <ListItemDeleteAction onPress={() => handleDelete(item)} />}
                     />
                 )}
                 ItemSeparatorComponent={ListItemSeperator}
                 refreshing={refreshing}
-                onRefresh={() => {
-                    setMessages([
-                        {
-                            id: 2,
-                            title: "T2",
-                            description: "D2",
-                            image: require("../assets/dashty.jpg"),
-                        },
-                    ])
-                }}
+                onRefresh={onRefresh}
             />
         </Screen>
     )

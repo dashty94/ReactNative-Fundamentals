@@ -1,7 +1,8 @@
 {
     "expo": {
-        "name": "HelloReactNative",
-        "slug": "HelloReactNative",
+        "name": "DoneWithIt",
+        "slug": "DoneWithIt",
+        "privacy": "unlisted",
         "platforms": ["ios", "android", "web"],
         "version": "1.0.0",
         "orientation": "portrait",

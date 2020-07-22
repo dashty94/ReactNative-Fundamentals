@@ -32,7 +32,7 @@ function AccountScreen({ navigation }) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
-                <ListItem title={user.name} subTitle={user.email} image={require('../assets/dashty.jpg')} />
+                <ListItem title={user.name} subTitle={user.email} image={require('../assets/user.png')} />
             </View>
             <View style={styles.container}>
                 <FlatList

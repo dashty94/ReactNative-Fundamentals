@@ -1,14 +1,14 @@
 import { StyleSheet, View } from 'react-native'
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 import AppText from './AppText'
 import { Image } from 'react-native-expo-image-cache'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import colors from '../config/colors'
 
 function Card({ title, subTtitle, imageUrl, onPress, thumbnailUrl }) {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.card}>
                 <Image uri={imageUrl} style={styles.image} preview={{ uri: thumbnailUrl }} tint="light" />
                 <View style={styles.detailsContainer}>
@@ -16,7 +16,7 @@ function Card({ title, subTtitle, imageUrl, onPress, thumbnailUrl }) {
                     <AppText style={styles.subTtitle}>{subTtitle}</AppText>
                 </View>
             </View>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
     )
 }
 

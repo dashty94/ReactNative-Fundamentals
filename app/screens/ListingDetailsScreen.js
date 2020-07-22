@@ -5,12 +5,20 @@ import ContactSellerForm from '../components/ContactSellerForm'
 import { Image } from 'react-native-expo-image-cache'
 import { ListItem } from '../components/lists'
 import React from 'react'
+import Screen from '../components/Screen'
+import { ScrollView } from 'react-native-gesture-handler'
 import colors from '../config/colors'
 
 function ListingDetailsScreen({ route }) {
     const listing = route.params
+
     return (
-        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 100}>
+        // <KeyboardAvoidingView
+        //     style={styles.container}
+        //     behavior="position"
+        //     keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 100}
+        // >
+        <ScrollView style={styles.container}>
             <Image
                 uri={listing.images[0].url}
                 preview={{ uri: listing.images[0].thumbnailUrl }}
@@ -25,11 +33,18 @@ function ListingDetailsScreen({ route }) {
                 </View>
                 <ContactSellerForm listing={listing} />
             </View>
-        </KeyboardAvoidingView>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+        marginTop: '20%',
+        borderRadius: 30,
+        overlayColor: 'black',
+    },
+
     image: {
         width: '100%',
         height: 300,
